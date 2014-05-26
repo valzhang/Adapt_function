@@ -36,7 +36,7 @@ end
             
         %读取文件并赋值给临时变量
         
-       [Contract,str_Date,str_Time,int_Date,int_Time,Close,Open,High,Low,Volume,Amount,Buy,Buy_Vol,Sell,Sell_Vol,OI] = textread(readPath,'%s %s %s %d %d %f %f %f %f %f %f %f %d %f %d %d');
+       [Contract,str_Date,str_Time,int_Date,int_Time,Close,Open,High,Low,Volume,Amount,Buy,Buy_Vol,Sell,Sell_Vol,OI] = textread(readPath,'%s %s %s %d %d %f %f %f %f %f %f %f %d %f %d %n');
 
 
         a = length(Contract) + 1;

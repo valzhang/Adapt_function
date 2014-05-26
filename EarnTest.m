@@ -22,7 +22,7 @@ function varargout = EarnTest(varargin)
 
 % Edit the above text to modify the response to help EarnTest
 
-% Last Modified by GUIDE v2.5 22-May-2014 14:14:39
+% Last Modified by GUIDE v2.5 26-May-2014 21:40:50
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -264,6 +264,7 @@ else
     month_data = cell2mat(monthdetail(2:row, 2:col));
     axes(handles.axes1)    
     bar(month_data(:,2), 0.5);
+    
     len = length(month_data);
     gap = len/4;
     set(handles.axes1,'XTick',[fix(1:gap:len) len]);
@@ -282,7 +283,6 @@ else
     day_data = cell2mat(dailydetail(2:row, 2:col));
     axes(handles.axes2)
     plot(1:length(day_data), cumsum(day_data(:,2)), '-r*');   
-    
     
     %dailydetail(2:row, 1)
    % size(dailydetail(2:row, 1))
@@ -462,3 +462,11 @@ function edit11_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- If Enable == 'on', executes on mouse press in 5 pixel border.
+% --- Otherwise, executes on mouse press in 5 pixel border or over pushbutton1.
+function pushbutton1_ButtonDownFcn(hObject, eventdata, handles)
+% hObject    handle to pushbutton1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)

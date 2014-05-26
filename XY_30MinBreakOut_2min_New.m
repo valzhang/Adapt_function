@@ -54,19 +54,23 @@ for i=1:length(cp)
         dayIndex = dayIndex + 1;
         int_DayDate = int_date(i);
         
+
         if dayIndex-1 >= 1
             dayBegIndex = dayIndex - 1;
             dayEndIndex = dayIndex - 1;
             %preDayData = COM_GetDataByIF(ContrID{i}, -1, dayDate{dayBegIndex}, [dayDate{dayEndIndex} ' 15:15:00']);
-            if (strcmpi(code, 'IF') == 1)
-                preDayData = ADT_GetDataByCode(ContrID{i}(1:(length(ContrID{i})-4)), -1, dayDate{dayBegIndex}, [dayDate{dayEndIndex} ' 15:15:00']);
-            else
-                preDayData = ADT_GetDataByCode(ContrID{i}(1:(length(ContrID{i})-4)), -1, dayDate{dayBegIndex}, [dayDate{dayEndIndex} ' 15:00:00']);
+            if length(dayDate{dayBegIndex}) > 0 && length(dayDate{dayEndIndex}) > 0
+                if (strcmpi(code, 'IF') == 1)
+                    preDayData = ADT_GetDataByCode(code, -1, dayDate{dayBegIndex}, [dayDate{dayEndIndex} ' 15:15:00']);
+                else
+                    preDayData = ADT_GetDataByCode(code, -1, dayDate{dayBegIndex}, [dayDate{dayEndIndex} ' 15:00:00']);
+                end
+
+                predayhp = preDayData.High;
+                predaylp = preDayData.Low;
             end
-            
-            predayhp = preDayData.High;
-            predaylp = preDayData.Low;
         end   
+        
         todayOp = op(i);
         vFlag = false;
     end
@@ -149,7 +153,8 @@ end
 %monthdetail = COM_GetMonthlyReturn(data.Close, signal, data.str_Date, 0.8);
 %outStat = COM_EvalIFPerf(data1,0.8);
 
-if length(data.int_Date) > 0
+if length(data.int_Date) > 0 && sum(abs(signal)) > 0
+
     data1 = ADT_BuySellSignal(data.Close, signal, data.str_Date, data.str_Time);
     dailydetail = ADT_GetDailyReturn(data.Close, signal, data.str_Date, code);
     monthdetail = ADT_GetMonthlyReturn(data.Close, signal, data.str_Date, code);

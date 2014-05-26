@@ -33,11 +33,17 @@ monthreturn = 0;
 
 for i=2:length(signal)
     signalmonth = cell2mat(date(i));
+    if length(signalmonth) <= 0
+        continue;
+    end
     signalmonth = signalmonth(1:7);
     if strcmpi(signalmonth,monthstr) == 0
         if strcmpi(monthstr,'2000/01') == 0 
             rst(count, 1) = {monthstr};
             rst(count, 2) = {month_trans_num};
+            if isnan(monthreturn) == 1
+                monthreturn = 0;
+            end
             rst(count, 3) = {monthreturn};
             count = count + 1;
         end;
@@ -63,6 +69,9 @@ for i=2:length(signal)
 end
     rst(count, 1) = {monthstr};
     rst(count, 2) = {month_trans_num};
+    if isnan(monthreturn) == 1
+        monthreturn = 0;
+    end
     rst(count, 3) = {monthreturn/leverage}; 
     
 end

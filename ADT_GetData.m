@@ -57,7 +57,7 @@ catch ME1
 end
 
 %读取文件并赋值给临时变量
-[Contract,str_Date,str_Time,int_Date,int_Time,Close,Open,High,Low,Volume,Amount,Buy,Buy_Vol,Sell,Sell_Vol,OI] = textread(path,'%s %s %s %d %d %f %f %f %f %f %f %f %d %f %d %d');
+[Contract,str_Date,str_Time,int_Date,int_Time,Close,Open,High,Low,Volume,Amount,Buy,Buy_Vol,Sell,Sell_Vol,OI] = textread(path,'%s %s %s %d %d %f %f %f %f %f %f %f %d %f %d %n');
 
 n_Date1 = t1(1)*10000 + t1(2)*100 + t1(3);
 n_Time1 = t1(4)*10000 + t1(5)*100 + t1(6);
