@@ -166,6 +166,6 @@ else
     dailydetail = -1;
     monthdetail = -1;
     allsignal = -1;
-    signalSeries = -1;
+    signalSeries = struct('data', {data}, 'signal', {signal});
 end
 end

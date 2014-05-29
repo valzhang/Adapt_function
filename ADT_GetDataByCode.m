@@ -10,7 +10,7 @@
 
 function data = ADT_GetDataByCode(code, cycle, begT, endT)
 
-readPath = 'E:\testData\main\';
+readPath = 'E:\KData\main\';
 
 ME = MException('GetData:InvalidInput','Invalid input!');
 

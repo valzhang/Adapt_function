@@ -160,7 +160,7 @@ for i = 1:8
             k_line(i) = {30};
     end
     
-    k_code(i) = code(j);
+    k_code(i) = code(cor_y(1));
 end
 size(k_line')
 size(k_code')

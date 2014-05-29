@@ -10,7 +10,7 @@
 function data = ADT_GetData(code, cycle, begT, endT)
 
 %指定读取文件路径
-path = 'E:\testData\main\';
+path = 'E:\KData\main\';
 
 ME = MException('GetData:InvalidInput','Invalid input!');
 %指定合约

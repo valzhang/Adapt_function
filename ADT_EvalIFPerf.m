@@ -66,7 +66,7 @@ end
 %计算最大回撤，开始回撤时间，
 if t_num>1 
     [drawdown drawdown_begT drawdown_endT] = MDD(cumsum(rtn - fee_group));
-else
+else if t_num == 1
     if rtn(1)>0
         drawdown = 0;
         drawdown_begT = 1;
@@ -75,6 +75,7 @@ else
         drawdown = -1 * rtn(1);
         drawdown_begT = 1;
         drawdown_endT = 1; 
+    end
     end
 end
 
@@ -136,6 +137,8 @@ function [rst begT endT] = MDD(NAV)
 
 rst = 0;
 peak = -99999;
+begT = 1;
+endT = 1;
 for i = 1:length(NAV)
   if (NAV(i) > peak) 
     peak = NAV(i);
