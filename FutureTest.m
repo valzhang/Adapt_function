@@ -78,6 +78,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+%初始化各个控件的值
 path = 'code.xls';
 [num code] = xlsread(path);
 start_date = get(handles.edit1, 'String');
@@ -119,6 +120,7 @@ for i = 1:6
                 otherwise
             end
             if cell2mat(outStat(5, 2)) > 0
+                %设置回测指标显示值
                 earn_ratio(i,j) = cell2mat(outStat(4,2));
                 trans_num(i,j) = cell2mat(outStat(5,2));
                 draw_down(i,j) = 0 - cell2mat(outStat(9,2));    %最大回撤取反
@@ -130,12 +132,13 @@ for i = 1:6
         end
     end
 end
+
 data = {earn_ratio, trans_num, draw_down, max_win, max_lose, sharp_ratio, win_ratio};
 sort_num = get( handles.popupmenu2, 'Value');
 sort_data = cell2mat(data(sort_num));
 
 output_data = cell(8,7);
-
+%计算指定指标最高的8个品种K线
 for i = 1:8
     max_value = max(max(sort_data));
     [cor_x cor_y] = find(sort_data == max_value);
@@ -162,9 +165,8 @@ for i = 1:8
     
     k_code(i) = code(cor_y(1));
 end
-size(k_line')
-size(k_code')
 
+%显示指标最好的8种K线详细回测指标
 set( handles.uitable1, 'ColumnName', { 'K线种类', '期货品种', '年化收益率', '交易次数', '最大回撤', '单次交易最大盈利', '单次交易最大亏损', '年化夏普比率', '交易胜率' }, 'Data', [ k_line' k_code' output_data ] );
 %set( handles.uitable1, 'ColumnName', '期货品种', 'Data', k_code' );
 %set( handles.uitable1, 'ColumnName', '年化收益率', 'Data', output_data(:, 1) );

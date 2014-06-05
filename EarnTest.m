@@ -241,6 +241,7 @@ end_date = get(handles.edit2, 'String');
 start_date = [start_date ' 09:00:00'];
 end_date = [end_date ' 15:15:00'];
 [outStat, dailydetail, monthdetail, allsignal, signalSeries]=XY_30MinBreakOut_2min_New(cell2mat(code), cycle, start_date, end_date);
+%显示回测指标
 if cell2mat(outStat(5, 2)) < 0
     errordlg('选定时间内没有该期货品种的交易数据！','错误信息','on') ;
     set(handles.edit5, 'String', '0.0');
@@ -260,6 +261,7 @@ else
     set(handles.edit10, 'String', cell2mat(outStat(27,2)));
     set(handles.edit11, 'String', cell2mat(outStat(6,2)));
     
+    %绘制月度收益柱形图与按日累计收益曲线
     [row col] = size(monthdetail);
     month_data = cell2mat(monthdetail(2:row, 2:col));
     axes(handles.axes1)    

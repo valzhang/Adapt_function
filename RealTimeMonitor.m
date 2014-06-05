@@ -71,6 +71,8 @@ function varargout = RealTimeMonitor_OutputFcn(hObject, eventdata, handles)
 
 % Get default command line output from handles structure
 varargout{1} = handles.output;
+
+%定义并初始化全局变量
 global log_string
 log_string = {'——','——','——','——','——','——'};
 global last_signal
@@ -150,11 +152,12 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+%定义计时器timer
 push_t = timer('TimerFcn', {@timercallback, handles}, 'ExecutionMode', 'fixedRate', 'Period', 30 );
 start(push_t);
 
 function timercallback(obj, event, handles)
+%初始化各个控件的值
 path = 'code.xls';
 [num All_code] = xlsread(path);
 code_num = get(handles.popupmenu1, 'Value');
